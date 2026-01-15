@@ -12,14 +12,6 @@ from typing_extensions import TypedDict
 
 import sqlite3
 
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-os.environ['GOOGLE_API_KEY'] = os.getenv('GEMINI_KEY')
-os.environ['TAVILY_API_KEY'] = os.getenv('TAVILY_KEY')
-
 class AgentState(TypedDict):
     messages: Annotated[list[AnyMessage], operator.add]
 

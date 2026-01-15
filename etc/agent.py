@@ -1,6 +1,7 @@
 from agent_state import AgentState
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph.graph import StateGraph, END
+from langchain_core.tools import tool
 from langchain_core.messages import HumanMessage, SystemMessage, ToolMessage, BaseMessage, AnyMessage
 
 
