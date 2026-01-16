@@ -111,7 +111,7 @@ The solution was built using a custom `Agent` class that wraps the **LangGraph**
 * **Tool Construction:** Learned how to build custom tools and effectively bind them to the model to extend its capabilities.
 * **Model Interaction:** Understood how to manage the interaction loop between the LLM, the state, and tool execution to create a cohesive assistant.
 
-### What I would do differently with more time
+### Future Development
 * **Code Quality:** Enforce strict type hints following PEP 8 and integrate tools like `mypy` and linters for code quality control.
 * **Model Fallback:** Integrate OpenAI as a fallback provider to ensure system reliability in case of Gemini instability.
 * **Advanced Context Control:** Implement tools to manage multiple conversation threads, allowing users to switch between, exit, and resume specific sessions while preserving their full context.
