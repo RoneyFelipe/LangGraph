@@ -107,13 +107,16 @@ The solution was built using a custom `Agent` class that wraps the **LangGraph**
 ## 💡 Learnings and Next Steps
 
 ### What I learned
-* **Production Readiness:** Adding retry mechanisms (`stamina`) is crucial for building reliable agents that don't crash on minor API hiccups.
-* **Database Concurrency:** Learned to handle SQLite locking issues by creating independent connections when a Tool needs to perform administrative tasks (like deleting context) while the Agent holds the main connection.
-* **State Management:** How to effectively map the `AgentState` to preserve conversation history across turns.
+* **LangGraph Architecture:** Gained hands-on experience in utilizing LangGraph to structure agent workflows using its graph-based system (nodes and edges).
+* **Tool Construction:** Learned how to build custom tools and effectively bind them to the model to extend its capabilities.
+* **Model Interaction:** Understood how to manage the interaction loop between the LLM, the state, and tool execution to create a cohesive assistant.
 
 ### What I would do differently with more time
-* **User Interface:** Implement a graphical frontend using Streamlit or Chainlit.
+* **Code Quality:** Enforce strict type hints following PEP 8 and integrate tools like `mypy` and linters for code quality control.
+* **Model Fallback:** Integrate OpenAI as a fallback provider to ensure system reliability in case of Gemini instability.
+* **Advanced Context Control:** Implement tools to manage multiple conversation threads, allowing users to switch between, exit, and resume specific sessions while preserving their full context.
 * **Dockerization:** Create a `Dockerfile` for consistent deployment.
 * **Streaming:** Implement token streaming to improve the perceived latency for the user.
+* **User Interface:** Implement a graphical frontend using Streamlit or Chainlit.
 
 ---
