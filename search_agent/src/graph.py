@@ -1,8 +1,9 @@
 from src.state import AgentState
+from stamina import retry
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph.graph import StateGraph, END
 from langchain_core.tools import tool
-from langchain_core.messages import HumanMessage, SystemMessage, ToolMessage, BaseMessage, AnyMessage
+from langchain_core.messages import SystemMessage, ToolMessage
 
 class Agent:
 
@@ -25,7 +26,7 @@ class Agent:
         self.tools = {t.name: t for t in tools}
         self.model = model.bind_tools(tools)
     
-        
+    @retry(on=Exception, attempts=3, wait_initial=1.0, wait_max=30, wait_jitter=1.0)
     def call_gemini(self, state: AgentState):
 
         messages = state['messages']

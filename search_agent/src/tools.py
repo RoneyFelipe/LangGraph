@@ -1,27 +1,33 @@
+import sqlite3
+from stamina import retry
+
 from langchain_core.tools import BaseTool, tool
 from langchain_tavily import TavilySearch
 from src.state import context
-import sqlite3
 
 from src.configs import TAVILY_API_KEY
-
+    
 @tool
-def calculator(expression: str) -> str:
+def calculator(expression):
     """Calcula o resultado de uma expressão matemática.
     
     Args:
         expression (str): A conta matemática a ser feita (ex: "2 + 2", "5 * 10").
         
     Returns:
-        str: O resultado numérico da conta.
+        st
     """
     try:
-        return str(eval(expression))
+        return _calculator_interna(expression)
     except Exception as e:
-        return f"Erro: {e}"
+        return f"Erro sistêmico: Não foi possível calcular '{expression}' após várias tentativas. Detalhe: {e}"
+
+@retry(on=Exception, attempts=3, wait_initial=1.0, wait_max=30, wait_jitter=1.0)
+def _calculator_interna(expression):
+    return str(eval(expression))
 
 @tool
-def reset_memory() -> str:
+def reset_memory():
     """
     Apaga, limpa ou deleta todo o histórico e contexto da conversa armazenado no banco de dados.
     Use esta ferramenta IMEDIATAMENTE se o usuário pedir 'DELETE O CONTEXTO', 'Limpar memória' ou 'Esquecer tudo'.

@@ -6,8 +6,7 @@ from src.graph import Agent
 from src.prompts import prompt_system
 import uuid
 
-model = ChatGoogleGenerativeAI(model="gemini-2.5-flash") # Recomendo usar nomes estáveis, o '3-preview' pode ser instável
-
+model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 abot = Agent(model, TOOLS, system=prompt_system, checkpointer=memory)
 
 thread_id = "sessao_teste_1"
@@ -30,4 +29,5 @@ while True:
             sender = "IA" if message.type == "ai" else "Tool" if message.type == "tool" else "Humano"
             
             if sender != "Humano":
+                print("------------------------------- Chat -------------------------------")
                 print(f"[{sender}]: {message.content}")
